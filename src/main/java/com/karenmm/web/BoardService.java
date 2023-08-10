@@ -15,6 +15,10 @@ public class BoardService {
 		
 		return boardDAO.boardList();
 	}
+
+	public String datail(int bno) {
+		return boardDAO.detail(bno);
+	}
 	
 	
 

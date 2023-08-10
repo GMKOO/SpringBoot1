@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 public interface BoardDAO {
 
 	List<BoardDTO> boardList();
+
+	String detail(int bno);
 	
 	}
 

@@ -3,7 +3,7 @@
 <mapper namespace="com.karenmm.web.BoardDAO">
 
 
-<select id="boardList" resultType="com.karenmm.web.BoardDTO">
+<select id="boardList" resultType="BoardDTO">
 
 SELECT bno, btitle, m_name, m_id, bdate, blike, bip, commentcount
 FROM boardview LIMIT 0,10
@@ -11,6 +11,12 @@ FROM boardview LIMIT 0,10
 
 </select>
 
+<select id="detail" parameterType="Integer" resultType="String">
+ 
+ SELECT bcontent FROM boardview WHERE bno=#{bno}
+ 
+ 
+ </select>
 
 
 

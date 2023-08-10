@@ -36,6 +36,10 @@ dependencies {
 	implementation	'org.apache.tomcat.embed:tomcat-embed-jasper'//tomcat사용하기
 	// implementation	'org.mariadb.jdbc:mariadb-java-client:3.0.8'//DB
 	implementation	'org.springframework.boot:spring-boot-starter-tomcat' //runtime시에만 필요 
+	//제이슨추가
+	// https://mvnrepository.com/artifact/org.json/json
+	implementation 'org.json:json:20230227'
+	
 }
 
 tasks.named('test') {
