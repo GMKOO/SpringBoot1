@@ -8,8 +8,10 @@
 <title>글쓰기</title>
 <script src="./js/jquery-3.7.0.min.js"></script>
 <link href="css/styles.css" rel="stylesheet" />
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-<script type="text/javascript" src="./js/HuskyEZCreator.js" charset="utf-8"></script>
 <style type="text/css">
 	.write-form {
 		background-color: white;
@@ -24,21 +26,46 @@
 }
 </style>
 </head>
+<script type="text/javascript">
+$(function(){
+	$(".writeBtn").click( function(){
+		let id = $("#title").val();
+		if(id==null || id == "") {
+			alert("값을 입력하세요.");
+			$("#title").focus();
+			return false;
+			
+		}
+		
+		let summernote = $("#summernote").val();
+		if(summernote == null || summernote == "") {
+			alert("내용을 입력하세요.");
+			return false;
+		}
+	 // 위 두 검사가 성공한다면 form 전송하기 
+	 	$("#form").submit();
+	});
+	
+	
+});
+
+
+</script>
 <body>
 	<%@ include file="menu.jsp"%>
 	<!-- Masthead-->
 	<header class="masthead">
 		<div class="container">
 			<div class="rounded-3 write-form">
-			<form action="./write" method="post">
+			<form action="./write" id="form" method="post">
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">제목</span>
 					</div>
-					<input type="text" class="form-control" name="title">
+					<input type="text" class="form-control" id="title" name="title">
 				</div>
-				<textarea id="editorTxt" name="content"></textarea>
-				<button type="button" class="btn btn-primary">저장</button>
+				<textarea id="summernote" name="content"></textarea>
+				<button type="button" class="writeBtn btn btn-primary">저장</button>
 			</form>
 			</div>
 		</div>
@@ -47,20 +74,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="js/scripts.js"></script>
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+
 <script type="text/javascript">
-var oEditor = []
-smartEditor = function(){
-	nhn.husky.EZCreator.createInIFrame({
-		oAppRef: oEditor,
-		elPlaceHolder : "editorTxt",
-		sSkinURI : "SmartEditor2Skin.html",
-		fCreator: "createSEditor2"
-		
+$(document).ready(function() {
+	  $('#summernote').summernote();
+	  
+	  	height : 400 
+	  
 	});
-};
-$(function(){
-	smartEditor();
-});
+	
+
 </script>
 
 </body>

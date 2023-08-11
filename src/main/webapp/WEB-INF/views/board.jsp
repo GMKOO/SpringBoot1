@@ -4,8 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>board</title>
-	<!-- Core theme CSS (includes Bootstrap)-->
+<title>  board</title>
     <link href="css/styles.css" rel="stylesheet" />
     <script src="./js/jquery-3.7.0.min.js"></script>
 	<style type="text/css">
@@ -34,46 +33,60 @@
 		}
 		.detail-content{
 			width: 100%;
+			min-height: 500px;
+			height:calc(100vh - 230px);
 			height: auto;
 		}
 	</style>
 	<script type="text/javascript">
 	$(function(){
+		$(document).on("click", ".del", function(){
+			//가상 form만들어서 전송하기
+			let form = $('<form></form>');
+			form.attr('action', './delete');
+			form.attr("method", "post");
+			
+			form.append($("<input>", {type:'hidden', name:"bno", value:$(".bno").val()}));
+			form.append($("<input>", {type:'hidden', name:"uuid", value:$(".uuid").val()}));
+			
+			form.appendTo("body");
+			form.submit();
+		});
+		
+		$(document).on("click", ".edit", function(){
+			let bno = $(".bno").val();
+			let uuid = $(".uuid").val();
+			alert(bno + " / " + uuid);
+		});
+		
+		
 		$(".detail").click(function(){
 			let bno = $(this).children("td").eq(0).html();
 			let title = $(this).children("td").eq(1).text();
 			let name = $(this).children("td").eq(2).html();
 			let date = $(this).children("td").eq(3).html();
-			let read = $(this).children("td").eq(4).html();
+			let read = Number($(this).children("td").eq(4).html()) + 1;
 			let comment =  $(this).children("td").eq(1).children(".bg-secondary").text().length+1;
-			if(comment > 0){
-				title = title.slice(0, -comment);
-			}
-			//alert(first.text());
-			//$(".modal-bno").text(bno + "/" + name + "/" + read);
-			
+			if(comment > 0){title = title.slice(0, -comment);}
 			$.ajax({
 				url:"./detail",
 				type: "post",
-				data: {"bno": bno},
+				data: {bno: bno},
 				dataType: "json",
 				success:function(data){
-					//alert(data.content);
 					$(".modal-title").text(title);
-					$(".detail-name").text(name);
+					name = name + '<img class="edit" src="./img/update2.png"> <img class="del" src="./img/delete2.png">';
+					name += '<input type="hidden" class="bno" value="'+bno+'">';
+					name += '<input type="hidden" class="uuid" value="'+data.uuid+'">';
+					$(".detail-name").html(name);
 					$(".detail-date").text(date);
 					$(".detail-read").text(read);
 					$(".detail-content").html(data.content);
 					$("#exampleModal").modal("show");
 				},
-				error:function(error){
-					alert("에러가 발생했습니다. 다시 시도하지 마십시오.");
-				}
+				error:function(error){alert("에러가 발생했습니다. 다시 시도하지 마십시오.");}
 			});
-			
-			
 		});
-		//$(".modalOpen").click(function(){$("#exampleModal").modal("show");});
 	});
 	</script>
 </head>
@@ -104,9 +117,6 @@
                		</tbody>
                </table>
                <button type="button" class="btn btn-secondary" onclick="location.href='./write'">글쓰기</button>
-               <button type="button" id="modal1" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">모달</button>
-               <button type="button" class="modalOpen btn btn-light">모달열기</button>
-               
             </div>
         </header>
 
@@ -137,14 +147,8 @@
 
 
 
-        <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-        <!-- * *                               SB Forms JS                               * *-->
-        <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-        <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>
