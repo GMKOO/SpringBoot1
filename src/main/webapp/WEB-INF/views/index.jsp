@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -23,7 +24,25 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container">
-                <div class="masthead-subheading">Welcome To Our Studio!</div>
+            
+            <c:if test="${sessionScope.mname ne null }">     
+         		 ${mname } 님 반갑습니다
+             </c:if>
+             
+             <c:if test="${sessionScope.mname eq null }"> 
+             로그인해주세요.
+             </c:if>
+             
+            
+          
+       
+
+	
+			
+			
+            
+              
+                
                 <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
                 <a class="btn btn-primary btn-xl text-uppercase" href="#services">Tell Me More</a>
             </div>

@@ -78,9 +78,11 @@
 					name = name + '<img class="edit" src="./img/update2.png"> <img class="del" src="./img/delete2.png">';
 					name += '<input type="hidden" class="bno" value="'+bno+'">';
 					name += '<input type="hidden" class="uuid" value="'+data.uuid+'">';
+				
+					
 					$(".detail-name").html(name);
 					$(".detail-date").text(date);
-					$(".detail-read").text(read);
+					$(".detail-read").text(data.ip+"/"+read);
 					$(".detail-content").html(data.content);
 					$("#exampleModal").modal("show");
 				},
@@ -100,7 +102,7 @@
                		<thead>
                		<tr class="row">
                			<th class="col-1">번호</th>
-               			<th class="col-6">제목</th>
+               			<th class="col-5">제목</th>
                			<th class="col-2">글쓴이</th>
                			<th class="col-2">날짜</th>
                			<th class="col-1">읽음</th>
@@ -109,10 +111,11 @@
                		<tbody><c:forEach items="${list }" var="row">
                		<tr class="row detail">
                			<td class="col-1">${row.bno}</td>
-               			<td class="col-6 title">${row.btitle}<c:if test="${row.commentcount ne 0 }">&nbsp;<span class="badge bg-secondary">${row.commentcount}</span></c:if></td>
+               			<td class="col-5 title">${row.btitle}<c:if test="${row.commentcount ne 0 }">&nbsp;<span class="badge bg-secondary">${row.commentcount}</span></c:if></td>
                			<td class="col-2">${row.m_name}</td>
                			<td class="col-2">${row.bdate}</td>
                			<td class="col-1">${row.blike}</td>
+               	
                		</tr></c:forEach>
                		</tbody>
                </table>
