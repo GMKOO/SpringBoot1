@@ -69,6 +69,10 @@
             <div class="container">
                <div class="rounded-3 login-form">
                		<h2>LOGIN</h2>
+               <c:if test="${param.error eq 'login' }">
+               	<div class="mb-3 row"> 
+               	<
+               </c:if>
                
 				<div class="mb-3 row">
 					<label for="staticEmail" class="col-sm-3 col-form-label">I D</label>
@@ -92,8 +96,13 @@
 
             </div>
         </header>
+        <!-- 에러가들어오면 동작하게 하겠습니다 -->
         
-     
+       <c:if test="${param.error ne null }">
+        <script type="text/javascript">
+        alert("로그인 해야 사용 할수 있는 메뉴 입니다.");
+        </script>
+     </c:if>
         
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

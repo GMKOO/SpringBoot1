@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.karenmm.web.MultiBoardDAO">
+
+
+
+<select id="list" parameterType="Integer" resultType="Map">
+
+SELECT mb.mb_no, mb.mb_title,mb.mb_content,mb.mb_date,mb.mb_read,m.m_name,mb.mb_commentcount
+FROM multiboard mb INNER JOIN members m ON mb.m_no = m.m_no 
+</select>
+
+ <insert id="mbWrite" parameterType="Map">
+ 
+
+ 
+ INSERT INTO multiboard (mb_title, mb_content , mb_board , m_no) 
+ VALUES (#{title},#{content},#{board},(SELECT m_no FROM members WHERE m_id=#{mid }))
+ 
+
+
+      
+      <selectKey resultType="Integer" keyProperty="mb_no" order="AFTER">
+         SELECT LAST_INSERT_ID()
+      </selectKey>
+   </insert>
+ 
+ 
+
+ 
+ <select id="mbdetil" parameterType="Integer" resultType="Map">
+ 
+ SELECT mb.mb_no,mb.mb_title,mb.mb_content,mb.mb_date,mb.mb_read,mb.mb_board,mb.m_name 
+ FROM multiboard mb INNER JOIN members m ON mb.m_no = m.m_no
+ WHERE mb_no=#{mbno}
+ 
+ </select>
+ 
+
+ 
+
+
+
+
+
+
+
+</mapper>

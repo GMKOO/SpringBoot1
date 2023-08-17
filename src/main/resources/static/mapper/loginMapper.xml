@@ -6,8 +6,13 @@
 
 <select id="login" parameterType="Map" resultType="Map">
 
-SELECT m_name, count(*) as count From members
-WHERE m_id=#{id} AND m_pw=#{pw} 
+
+
+
+SELECT COUNT(*) AS count, m_name
+FROM members
+WHERE m_id=#{id} AND AES_DECRYPT(UNHEX(m_pw),'koo')	= #{pw}
+
 </select>
 
 
