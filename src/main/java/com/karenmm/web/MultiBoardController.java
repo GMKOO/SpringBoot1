@@ -76,11 +76,11 @@ public class MultiBoardController {
 
 	}
 	
-	@GetMapping("mbdetail")
+	@GetMapping("/mbdetail")
 	public String mbDetail(@RequestParam(value ="mbno",required = true) int mbno,Model model) {
 		
 		System.out.println(mbno);
-		Map<String,Object> detail = mbService.mbdetail(mbno);
+		Map<String,Object> detail = mbService.mbDetail(mbno);
 		model.addAttribute("detail", detail);
 		return "mbdetail";
 	}

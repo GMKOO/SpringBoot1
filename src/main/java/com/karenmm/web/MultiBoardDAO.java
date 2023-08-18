@@ -18,6 +18,8 @@ public interface MultiBoardDAO {
 
 	int mbWrite(Map<String, Object> map);
 
-	Map<String, Object> mbdetail(int mbno);
+
+
+	Map<String, Object> mbDetail(int mbno);
 
 }

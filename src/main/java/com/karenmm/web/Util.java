@@ -120,4 +120,12 @@ public class Util {
 
 	}
 	
+	public int obtoint(Object obj) {
+		
+	int	result=Integer.parseInt(String.valueOf(obj));
+		
+		return result;
+		
+	}
+	
 }

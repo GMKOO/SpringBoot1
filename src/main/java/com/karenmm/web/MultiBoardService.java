@@ -25,8 +25,11 @@ public class MultiBoardService {
 		return mbDAO.mbWrite(map);
 	}
 
-	public Map<String, Object> mbdetail(int mbno) {
-		return mbDAO.mbdetail(mbno);
+
+
+	public Map<String, Object> mbDetail(int mbno) {
+		// TODO Auto-generated method stub
+		return mbDAO.mbDetail(mbno);
 	}
 
 }

@@ -10,35 +10,27 @@ import org.springframework.stereotype.Service;
 public class BoardService {
 	@Autowired
 	private Util util;
-	
+
 	@Autowired
 	private BoardDAO boardDAO;
 
 	public List<BoardDTO> boardList() {
-		
 		return boardDAO.boardList();
 	}
 
 	public BoardDTO datail(int bno) {
 		boardDAO.readUP(bno);
-		//읽음수 1더하기
+		// 읽음수 1더하기
 		return boardDAO.detail(bno);
 	}
 
 	public int write(BoardDTO dto) {
-		//ip
+		// ip
 		dto.setBip(util.getIp());
-		//uuid
+		// uuid
 		dto.setUuid(UUID.randomUUID().toString());
 		return boardDAO.write(dto);
-		
+
 	}
-
-
-	
-	
-	
-	
-
 
 }
