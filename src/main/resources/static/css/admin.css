@@ -1,0 +1,127 @@
+
+@charset "UTF-8";
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+}
+.container {
+	width: 100%;
+	height: 100vh;
+}
+
+.header {
+	position: absolute;
+	margin : 0;
+	padding: 0;
+	width: 50px;
+	height: 100vh;
+	background-color: black;
+	float: left;
+	overflow: hidden;
+	margin: 0;
+	/* border-radius: 0% 5% 5% 0%; */
+}
+
+.header:hover {
+	width: 200px;
+	transition: 0.3s;
+}
+
+.menu {
+	width: 200px;
+	padding-top: 50px;
+	height: calc(100vh - 50px);
+}
+
+.logo {
+	margin: 25px;
+	width: 150px;
+	height: 150px;
+	background-color: gray;
+}
+
+.menu-item {
+	width: 200px;
+	height: 50px;
+	line-height: 50px;
+	overflow: hidden;
+	color: white;
+	margin: 5px;
+	box-sizing: border-box;
+}
+
+.menu-item i {
+	margin-right: 13px;
+	vertical-align: middle;
+}
+
+.menu-item a {
+	color: white;
+	text-decoration: none;
+}
+
+.menu-item:hover {
+	width: 200px;
+	height: 50px;
+	margin-left: 10px;
+	margin-left: 5px;
+	background-color: #c0c0c0;
+	box-sizing: border-box;
+	border-radius: 5%;
+}
+
+.main {
+	margin-left: 50px;
+	width: calc(100% - 50px);
+	height: 100vh;
+	float: left;
+}
+
+.article {
+	padding: 20px;
+	width: 100%;
+	min-width: 700px;
+	height: auto;
+}
+h2{
+	text-align: center;
+}
+.tableDiv{
+	width: calc(100% - 10px);
+	min-height: 657px; 
+	margin: 5px 0px;
+}
+thead{
+	background-color: #61BFFC;
+}
+
+
+table th, table td{
+	text-align: center;
+}
+.title{
+	text-align: left;
+}
+#paging{
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+}
+
+.modal {
+  width: 100%;
+  height: 90%;
+  margin: 0;
+  padding: 0;
+}
+
+.modal-dialog{
+  height: 100%;
+  min-height: 90%;
+  border-radius: 0;
+}
