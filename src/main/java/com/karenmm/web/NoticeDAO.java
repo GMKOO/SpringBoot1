@@ -10,7 +10,13 @@ public interface NoticeDAO {
 
 	
 
-	public List<Map<String, Object>> list(); 
+	public List<Map<String, Object>> list();
+
+	
+
+	public String getOriFileName(String fileName);
+
+	public Map<String, Object> detail(int nno); 
 		
 	
 

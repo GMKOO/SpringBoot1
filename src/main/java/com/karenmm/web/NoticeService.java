@@ -19,4 +19,20 @@ public class NoticeService {
 		return noticeDAO.list();
 	}
 
+
+
+	
+
+
+	public String getOriFileName(String fileName) {
+		return noticeDAO.getOriFileName(fileName);
+	}
+
+
+
+	public Map<String, Object> detail(int nno) {
+		// TODO Auto-generated method stub
+		return noticeDAO.detail(nno);
+	}
+
 }

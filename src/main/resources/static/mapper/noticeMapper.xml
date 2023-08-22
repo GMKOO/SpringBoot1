@@ -5,10 +5,30 @@
 
 	<select id="list" resultType="Map">
 
-		SELECT nno,ntitle,ncontent,ndate,m_no,norifile,nrealfile,ndel
-		FROM notice
+	SELECT nno, ntitle, ndate, m_no, nrealfile
+	FROM notice
+	WHERE ndel = 1 
+	ORDER BY nno DESC 
+	LIMIT 0, 10 
 
 	</select>
+
+ 	<select id="detail" parameterType="Integer" resultType="Map">
+ 	
+ 	SELECT *
+ 	FROM noticeview
+ 	WHERE ndel=1 AND nno=#{nno}
+ 	
+ 	
+ 	</select>
+ 	
+ 	<select id="getOriFileName" parameterType="String" resultType="String">
+ 	SELECT norifile
+ 	FROM notice
+ 	WHERE nrealfile = #{fileName}
+ 	
+ 	
+ 	</select>
 
 
 </mapper>

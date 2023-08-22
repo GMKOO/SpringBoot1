@@ -35,6 +35,7 @@ a{
 	width: 200px;
 	padding-top: 50px;
 	height: calc(100vh - 50px);
+	float: left;
 }
 
 .logo {
@@ -78,7 +79,7 @@ a{
 	margin-left: 50px;
 	width: calc(100% - 50px);
 	height: 100vh;
-	float: left;
+	float: right;
 }
 
 .article {

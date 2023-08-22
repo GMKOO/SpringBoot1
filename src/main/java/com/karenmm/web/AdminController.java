@@ -1,7 +1,11 @@
 package com.karenmm.web;
 
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -83,43 +87,101 @@ public class AdminController {
 		@GetMapping("/notice")
 		public String notice(Model model) {
 			
-			//List<Map<String,Object>> list = adminService.list();
+			List<Map<String,Object>> list = adminService.list();
 			
 			//1.데이터베이스까지 연결하기
 			//2.데이터불러오기
 			//3.데이터 jsp로 보내기
-			//model.addAttribute("list", list);
+			model.addAttribute("list", list);
 			
 			return "admin/notice";
 		}
 		
 		@PostMapping("/noticeWrite")
-		public String noticceWrite(@RequestParam("upFile") MultipartFile upfile,@RequestParam Map<String,Object> map) {
+		public String noticeWrite(@RequestParam("upFile") MultipartFile upfile,@RequestParam Map<String,Object> map) {
 			System.out.println(map);
 			
+			
+			//2023-08-22 요구사항확인
+			//
 			
 			if(!upfile.isEmpty()) {
 			
 				//저장할 경로명 뽑기 request뽑기
 		         HttpServletRequest request = 
 		                 ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getRequest();
-			String path = request.getServletContext().getRealPath("/upload");
+		         // String타입의 경로를 file형태로 바꿔주겠습니다.
+		         String path = request.getServletContext().getRealPath("/upload");
 		         
-			File newFileName = new File(upfile.getOriginalFilename());
-
+		        // File filePath = new File(path);
+		         
+			//진짜로 파일 업로드하기 경로 + 저장할 파일명
+		    //중복이 발생할 수 있기 때문에... 파일명 +날짜+ID.파일확장자 
+		         //						uuid +파일명 + .확장자
+		         //                    아이디 + 날짜 +파일명 . 확장자 
+		         UUID uuid = UUID.randomUUID();
+		
+		
+		//날짜 뽑기 SimpleDateFormat
+		//Date date = new Date();
+		LocalDateTime ldt = LocalDateTime.now();
+		String format = ldt.format(DateTimeFormatter.ofPattern("YYYYMMddHHmmss"));
+		//SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHHmmss");
+		//String dataTime = sdf.format(date);
+		
+		
+		
+		//String realFileName = dataTime.toString()+uuid.toString() + upfile.getOriginalFilename();
+		//String realFileName = dataTime.toString() + upfile.getOriginalFilename();
+		//String realFileName = format.toString() + upfile.getOriginalFilename();
+		//날짜 +uuid +실제 파일명으로 사용하겠습니다.
+		//String realFileName = format.toString() +uuid.toString()+ upfile.getOriginalFilename();
+		String realFileName = format +uuid.toString()+ upfile.getOriginalFilename();
+		
+			//File newFileName = new File(path+"/"+upfile.getOriginalFilename());
+			//File newFileName = new File(path,upfile.getOriginalFilename());
+		File newFileName = new File(path,realFileName);
+			//이제 파일 올립니다.
+			try {
+				upfile.transferTo(newFileName);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
+			System.out.println("저장 끝.");
+			/* transferto를 사용하거나 FileCopyUtils를 사용하면된다 
+			//FileCopyUtils를 사용하기 위해서는 오리지널 파일을 byte[]로 만들어야 합니다.
+			try {
+				FileCopyUtils.copy(upfile.getBytes(), newFileName);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			*/
 			System.out.println("실제경로"+path);
 			map.put("mno",4);
 			//up파일 정보보기
 			System.out.println(upfile.getOriginalFilename());
 			System.out.println(upfile.getSize());
 			System.out.println(upfile.getContentType());
-			//adminService.noticeWrite(map);
-			
+		
+			map.put("upFile", upfile.getOriginalFilename());
+			map.put("realFile", realFileName);
+			adminService.noticeWrite(map);
+			System.out.println(realFileName);
+			System.out.println(upfile.getOriginalFilename());
 			}
 			return "redirect:/admin/notice";
 			
 		
+		}
+		
+		@GetMapping("/mail")
+		public String mail() {
+			return "admin/mail";
+			
 		}
 		
 		
