@@ -72,7 +72,7 @@
                		</tbody>
                </table></c:when><c:otherwise>
                		<h1>게시판에 글이 없습니다.</h1></c:otherwise></c:choose><c:if test="${sessionScope.mid ne null }">
-               <button type="button" class="btn btn-secondary" onclick="location.href='./noticeDetail?board=${param.board}'">글쓰기</button></c:if>
+               <button type="button" class="btn btn-secondary" onclick="location.href='./mbwrite?board=${param.board}'">글쓰기</button></c:if>
             </div>
         </header>
 

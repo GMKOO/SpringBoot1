@@ -10,6 +10,8 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.mail.EmailException;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
@@ -128,9 +131,6 @@ public class AdminController {
 		String format = ldt.format(DateTimeFormatter.ofPattern("YYYYMMddHHmmss"));
 		//SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMddHHmmss");
 		//String dataTime = sdf.format(date);
-		
-		
-		
 		//String realFileName = dataTime.toString()+uuid.toString() + upfile.getOriginalFilename();
 		//String realFileName = dataTime.toString() + upfile.getOriginalFilename();
 		//String realFileName = format.toString() + upfile.getOriginalFilename();
@@ -184,5 +184,69 @@ public class AdminController {
 			
 		}
 		
+		@PostMapping("/mail")
+		public String mail(@RequestParam Map<String,Object> map) throws EmailException {
+			
+			
+			//System.out.println(map);
+			// return "forward:/mail";
+			//util.simpleMailSender(map);
+		util.HtmlMailSender(map);
+			
+			return "admin/mail";
+		}
+		
+		@ResponseBody
+		@PostMapping("/noticeDetail")
+		public String noticeDetail(@RequestParam("nno") int nno,Model model) {
+			
+			JSONObject	json = new JSONObject();
+		String result =adminService.noticeDetail(nno);
+			
+		json.put("content", result);
+			
+			/*
+			System.out.println();
+			
+			ObjectNode	json = JsonNodeFactory.instance.objectNode();
+			Map<String, Object> maaaap = new HashMap<String, Object>();
+			maaaap.put("bno",123);
+			maaaap.put("btitle",1234);
+			
+			ObjectMapper jsonMap = new ObjectMapper();
+			
+			try {
+				json.put("map", jsonMap.writeValueAsString(maaaap));
+			} catch (JsonProcessingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			json.put("content", adminService.noticeDetail(nno));
+			
+	*/
+	
+			return json.toString();
+		}
+		
+		//noticeHide
+		@ResponseBody
+		@PostMapping("/noticeHide")
+		public String noticeHide(@RequestParam("nno") int nno) {
+			
+			JSONObject	json = new JSONObject();
+		//String result = adminService.noticeHide(nno);
+		
+		//ObjectNode json1 = JsonNodeFactory.instance.objectNode();
+		int result = adminService.noticeHide(nno);
+		
+	
+		json.put("result", result);
+		
+		System.out.println(result);
+		System.out.println(json.toString());
+			
+			return json.toString();
+		}
 		
 }
