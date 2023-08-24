@@ -18,6 +18,12 @@ public interface AdminDAO {
 
 	int noticeHide(int nno);
 
+	Map<String, Object> admultiboard();
+
+	List<Map<String, Object>> setupBoardList();
+
+	List<Map<String, Object>> member();
+
 
 
 	 

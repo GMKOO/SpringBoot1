@@ -4,8 +4,15 @@
 <mapper namespace="com.karenmm.web.MultiBoardDAO">
 
 <select resultType="Map" parameterType="Integer" id="list">
-SELECT mb_no, mb_title, mb_date, mb_read, m_id, m_name, mb_board 
-FROM mbboardview WHERE mb_board=#{board} LIMIT 0, 10 
+SELECT *, (SELECT COUNT(*) FROM mbboardview WHERE mb_board=#{board}) AS COUNT 
+FROM (SELECT 
+CAST(@ROWNUM:=@ROWNUM+1 AS UNSIGNED) AS rowNum, m.*
+FROM multiboardview m, (SELECT @ROWNUM:=0) AS R
+WHERE m.mb_board=#{board}
+ORDER BY m.mb_no ASC) mm
+ORDER BY mm.mb_no DESC
+LIMIT 0,10
+
 </select>
 
 
@@ -20,6 +27,14 @@ SELECT LAST_INSERT_ID()
 <select resultType="Map" parameterType="Integer" id="mbDetail">
 SELECT mb_no, mb_title, mb_content, mb_date, mb_read, mb_board, m_name 
 FROM mbboardview WHERE mb_no=#{mbno} 
+</select>
+
+<select id="boardlist" resultType="Map">
+
+SELECT * 
+FROM setupboard 
+ORDER BY b_no ASC
+
 </select>
 
 </mapper>

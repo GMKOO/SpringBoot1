@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -23,7 +25,7 @@ public class BoardController {
 	private BoardService boardService;
 
 	@GetMapping("/board")
-	public String board(Model model) {
+	public String board( Model model) {
 
 		List<BoardDTO> list = boardService.boardList();
 
@@ -87,6 +89,20 @@ public class BoardController {
 		System.out.println(dto.getUuid());
 
 		return "redirect:/board";
+	}
+	@ResponseBody
+	@PostMapping("/detail2")
+	public String detail2(@RequestParam("bno") int bno) throws JsonProcessingException {
+	
+		ObjectMapper mapp = new ObjectMapper();
+		BoardDTO detail = boardService.detail2(bno);
+		
+		
+		String json = mapp.writeValueAsString(detail);
+		
+		
+		return json.toString();
+		
 	}
 
 }

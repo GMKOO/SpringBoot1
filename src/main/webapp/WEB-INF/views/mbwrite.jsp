@@ -66,7 +66,7 @@ $(function(){
 				</div>
 				<textarea id="summernote" name="content"></textarea>
 				<input type="hidden" name="board" value="${board}">
-				<button type="button" class="writeBtn btn btn-primary">저장</button>
+				<button type="submit" class="writeBtn btn btn-primary">저장</button>
 			</form>
 			</div>
 		</div>

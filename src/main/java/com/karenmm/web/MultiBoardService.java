@@ -32,4 +32,8 @@ public class MultiBoardService {
 		return mbDAO.mbDetail(mbno);
 	}
 
+	public List<Map<String, Object>> boardlist() {
+		return mbDAO.boardlist();
+	}
+
 }

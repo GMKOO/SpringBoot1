@@ -33,4 +33,8 @@ public class BoardService {
 
 	}
 
+	public BoardDTO detail2(int bno) {
+		return boardDAO.detail2(bno);
+	}
+
 }

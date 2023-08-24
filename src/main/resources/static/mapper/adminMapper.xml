@@ -45,5 +45,15 @@ WHERE m_id=#{id} AND AES_DECRYPT(UNHEX(m_pw),'koo')	= #{pw} AND m_grade > 5
 		WHERE nno = #{nno}
 	</update>
 
+<select id="setupBoardList" resultType="Map">
+
+SELECT *
+FROM setupboard
+ORDER BY b_no ASC
+
+
+
+</select>
+
 
 </mapper>

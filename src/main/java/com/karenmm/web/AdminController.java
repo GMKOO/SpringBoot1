@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -81,11 +82,7 @@ public class AdminController {
 			return "admin/main1";
 		}
 		
-		@GetMapping("/multiboard")
-		public String adminmultboard() {
-			
-			return "admin/multiboard";
-		}
+	
 		
 		@GetMapping("/notice")
 		public String notice(Model model) {
@@ -248,5 +245,27 @@ public class AdminController {
 			
 			return json.toString();
 		}
+
+		@RequestMapping(value="/multiboard", method = RequestMethod.GET)
+		public String multiBoard(Model model) {
+
+			List<Map<String, Object>> map = adminService.setupBoardList();
+			
+			model.addAttribute("view", map);
+			
+			return "admin/multiboard";
+		}
 		
+		@PostMapping("/member")
+		public String member(Model model) {
+			
+			List<Map<String,Object>> list=adminService.member();
+			
+			
+			
+			return "";
+		}
+		
+			
+			
 }

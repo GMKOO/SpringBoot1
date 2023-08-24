@@ -109,9 +109,7 @@ tr:hover {
 				data : {nno : nno},
 				dataType : "json",
 				success : function(data) {
-
-					alert(data.result);
-
+			
 					if (nnoTD.html().indexOf("-off") != -1) {
 
 						nnoTD.html('<i class="xi-eye"></i>');

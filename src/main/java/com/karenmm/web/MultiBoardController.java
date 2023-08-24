@@ -21,9 +21,13 @@ public class MultiBoardController {
 	@GetMapping("/multiboard")
 	public String multiboard(@RequestParam(value = "board", defaultValue = "1" , required = false) int board,Model model) {
 		
+		//화면에 보여줄 게시판 목록도 가져오겠습니다.
 		List<Map<String,Object>> list = mbService.list(board);
+		List<Map<String,Object>> boardlist = mbService.boardlist();
 		
 		model.addAttribute("list", list);
+		model.addAttribute("boardlist", boardlist);
+		
 		System.out.println("mb게시판"+list);
 		
 		
@@ -65,7 +69,7 @@ public class MultiBoardController {
 			
 			 
 			
-			return "redirect:/mbdetail?mbno="+map.get("mb_no");
+			return "redirect:/mbdetail?board="+map.get("board")+"&mbno="+map.get("mb_no");
 		
 			
 		}else { 
