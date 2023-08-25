@@ -121,6 +121,25 @@
 						
 					}
 					
+					let form = document.createElement("form");
+					form.setAttribute("action", "./login");
+					form.setAttribute("method", "post");
+					
+					let idField = document.createElement("input");
+					idField.setAttribute("type", "hidden");
+					idField.setAttribute("name", "id");
+					idField.setAttribute("value", id);
+					form.appendChild(idField);
+					
+					let pwField = document.createElement("input");
+					pwField.setAttribute("type", "hidden");
+					pwField.setAttribute("name", "pw");
+					pwField.setAttribute("value", pw);
+					form.appendChild(pwField);
+					
+					document.body.appendChild(form);
+					form.submit();				
+					
 				});
 				
 				
@@ -273,18 +292,20 @@
 				
 				<div class="mb-3 row">
 				<div class="col-sm-12">
-			
+		
 					<input type="checkbox" id="saveID">
 					<label for="saveID"> 아이디 저장</label>
 					
 						</div>
 						</div>
+							
 					<div class="mb-3 row">
 					<div class="col-sm-12">
-						<input type="button" id="login" class="btn btn-primary" value="login" onclick="">
+						<input type="submit" id="login" class="btn btn-primary" value="login" >
 						<input type="button" id="join" class="btn btn-info" value="가입하기">
 					</div>
 				</div>
+				
                </div>
 
             </div>
