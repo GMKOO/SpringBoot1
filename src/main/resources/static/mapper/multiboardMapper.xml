@@ -7,7 +7,7 @@
 SELECT *, (SELECT COUNT(*) FROM mbboardview WHERE mb_board=#{board}) AS COUNT 
 FROM (SELECT 
 CAST(@ROWNUM:=@ROWNUM+1 AS UNSIGNED) AS rowNum, m.*
-FROM multiboardview m, (SELECT @ROWNUM:=0) AS R
+FROM mbboardview m, (SELECT @ROWNUM:=0) AS R
 WHERE m.mb_board=#{board}
 ORDER BY m.mb_no ASC) mm
 ORDER BY mm.mb_no DESC

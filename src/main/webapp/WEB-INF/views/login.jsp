@@ -16,8 +16,9 @@
 			background-color: rgba(240, 255, 240, 0.3);
 		}
 	</style>
-	<script>
+	<script type="text/javascript">
 	//자바스크립트일때
+	/*
 		function loginCheck() {
 			let id = document.querySelector("#id");//창입니다
 			let pw = document.querySelector("#pw");//input창 입니다
@@ -61,6 +62,187 @@
 				form.submit();				
 			}
 		}
+	*/
+
+		$(function(){
+			var userID = getCookie("userID");  //아이디
+		    var setCookiey = getCookie("setCookie");
+		    
+		    if(setCookiey == 'Y') {
+		        $("#saveID").prop("checked", true);
+		        $("#id").val(userID);
+		    } else {
+		        $("#saveID").prop("checked", false);
+		    }
+		    $("#id").val(userID);
+		    
+		   
+				$("#login").click(function(){
+				
+					//쿠키 값 가져오기
+					
+					
+					//쿠키 검사 -> 쿠키가 있다면 해당 쿠키
+					
+					//아이디 패스워드 검사하기
+					
+						
+						let id = $("#id").val();
+						let pw = $("#pw").val();
+						
+					if(id=="" || id.length <2) {
+						
+						alert("올바른 아이디를 입력하세요");
+						$("#id").focus();
+						return false;
+						
+					}
+					
+						if(pw=="" || pw.length <3) {
+						
+						alert("올바른 아이디를 입력하세요");
+						$("#pw").focus();
+						return false;
+						
+					}
+						
+					if($("#saveID").is(":checked")) {
+						alert("체크되어있습니다.");
+						
+						//setCookie("userID",사용자가입력한ID,7일간저장)
+						setCookie("userID",id,7);
+						setCookie("setCookie","Y",7);
+						
+					}else {
+						alert("체크X");
+						//deleteCookie()
+						deleteCookie("userID");
+						deleteCookie("setCookie");
+						
+					}
+					
+				});
+				
+				
+			});
+	/*	    
+		    $(".check").click(function(){
+		    	var id = $("#id").val();
+		    	var pw = $("#pw").val()
+		    	if(id == '' || id.length < 4){
+		    		alert("아이디를 입력하세요.");
+		    		$("#id").focus();
+		    		return false;
+		    	}
+		    	if(pw == '' || pw.length < 4){
+		    		alert("비밀번호를 입력하세요.");
+		    		$("#pw").focus();
+		    		return false;
+		    	}
+		    	if($(".saveID").is(":checked")){ 
+		            var userID = $("#id").val();
+		            setCookie("userID", userID, 7); 
+		            setCookie("setCookie", "Y", 7);
+		        } else {
+		            deleteCookie("userID");
+		            deleteCookie("setCookie");
+		        }
+		    	 document.loginForm.submit();
+		    });
+		    
+		});
+
+	*/
+	/*
+	$(function(){
+		$("#login").click(function(){
+		
+			//쿠키 값 가져오기
+			
+			
+			//쿠키 검사 -> 쿠키가 있다면 해당 쿠키
+			
+			//아이디 패스워드 검사하기
+			
+				
+				let id = $("#id").val();
+				let pw = $("#pw").val();
+				
+			if(id=="" || id.length <2) {
+				
+				alert("올바른 아이디를 입력하세요");
+				$("#id").focus();
+				return false;
+				
+			}
+			
+				if(pw=="" || pw.length <3) {
+				
+				alert("올바른 아이디를 입력하세요");
+				$("#pw").focus();
+				return false;
+				
+			}
+				
+			if($("#saveID").is(":checked")) {
+				alert("체크되어있습니다.");
+				
+				//setCookie("userID",사용자가입력한ID,7일간저장)
+				setCookie("userID",id,7);
+				setCookie("setCookie","Y",7);
+				
+			}else {
+				alert("체크X");
+				//deleteCookie()
+				deleteCookie("userID");
+				deleteCookie("setCookie");
+				
+			}
+			
+		});
+		
+		
+	});
+
+	*/
+	//쿠키값 Set
+	function setCookie(cookieName, value, exdays){
+	    var exdate = new Date();
+	    exdate.setDate(exdate.getDate() + exdays);
+	    
+	    var cookieValue = value + (exdays == null ? "" : ";expires="+exdate.toGMTString());
+	    document.cookie = cookieName + "=" + cookieValue;
+	    	// userID=poseidon; expires=2023-08-30
+	    //escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+	  
+	}
+
+	//쿠키값 Delete
+	function deleteCookie(cookieName){
+	    let expireDate = new Date();
+	    expireDate.setDate(expireDate.getDate() - 1);
+	    document.cookie = cookieName + "=" + ";expires=" + expireDate.toGMTString();
+	}
+	
+	
+
+	//쿠키값 가져오기
+	function getCookie(cookieName) {
+	   let x, y;
+	    let val = document.cookie.split(';');
+	    //alert(val);
+	    for (let i = 0; i < val.length; i++) {
+	        x = val[i].substr(0, val[i].indexOf('='));
+	        y = val[i].substr(val[i].indexOf('=') + 1);
+	       // x = x.replace(/^\s+|\s+$/g, ''); // 앞과 뒤의 공백 제거하기
+	        x= x.trim();
+	        if (x == cookieName) {
+	          return unescape(y); // unescape로 디코딩 후 값 리턴
+	        }
+	    }
+	}
+	
+
 	</script>
 </head>
 <body>
@@ -86,9 +268,20 @@
 						<input type="password" class="form-control" id="pw" placeholder="암호를 입력하세요">
 					</div>
 				</div>
+				
+				
+				
 				<div class="mb-3 row">
+				<div class="col-sm-12">
+			
+					<input type="checkbox" id="saveID">
+					<label for="saveID"> 아이디 저장</label>
+					
+						</div>
+						</div>
+					<div class="mb-3 row">
 					<div class="col-sm-12">
-						<input type="button" id="login" class="btn btn-primary" value="login" onclick="loginCheck()">
+						<input type="button" id="login" class="btn btn-primary" value="login" onclick="">
 						<input type="button" id="join" class="btn btn-info" value="가입하기">
 					</div>
 				</div>

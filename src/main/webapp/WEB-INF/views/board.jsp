@@ -93,7 +93,7 @@
 	});
 		//function Detial
 		function detail(bno) {
-			alert(bno + "번을 클릭 했습니다.");
+
 			
 			$.ajax({
 				url:"./detail2",
@@ -102,17 +102,15 @@
 				dataType: "json",
 				success:function(data){
 					
-					
-					$(".modal-title").text(data.title);
+					//alert(data.bno);
+					$(".modal-title").text(data.btitle);
 					let name = data.m_name + '<img class="" src="./img/update2.png"> <img class="del" src="./img/delete2.png">';
 					name += '<input type="hidden" class="bno" value="'+data.bno+'">';
 					name += '<input type="hidden" class="uuid" value="'+data.uuid+'">';
-				
-					
 					$(".detail-name").html(name);
 					$(".detail-date").text(data.bdate);
 					$(".detail-read").text(data.bip+" / "+data.blike);
-					$(".detail-content").html(data.content);
+					$(".detail-content").html(data.bcontent);
 					$("#exampleModal").modal("show");
 				},
 				error:function(error){alert("에러가 발생했습니다. 다시 시도하지 마십시오.");}

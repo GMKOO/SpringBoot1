@@ -40,7 +40,18 @@
 		}
 	</style>
 	<script type="text/javascript">
-	
+	/*
+	function createboard() {
+		
+		
+		  <c:forEach items="${boardlist }" var="l">
+	         <button onclick="location.href='${l.b_url }'">${l.b_catename }</button>
+	       
+	         
+	         </c:forEach>
+		
+	}
+	*/
 	</script>
 </head>
 <body>

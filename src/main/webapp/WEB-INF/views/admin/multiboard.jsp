@@ -58,6 +58,17 @@
 	</style>
 	<script type="text/javascript">
 	
+	function createboard() {
+		
+		
+		  <c:forEach items="${boardlist }" var="l">
+	         <button onclick="location.href='${l.b_url }'">${l.b_catename }</button>
+	       
+	         
+	         </c:forEach>
+		
+	}
+	
 	</script>
 </head>
 <body>
@@ -66,32 +77,36 @@
     
         
                <h1>게시판관리</h1>
-    			
- <div class="divTable minimalistBlack">   		
-  <div class="divTableHeading">
-    <div class="divTableRow">
-    <div class="divTableHead col-2">번호</div>
-    <div class="divTableHead col-2">카테코리</div>
-    <div class="divTableHead col-2">이름</div>
-    <div class="divTableHead col-3">url</div>
-    <div class="divTableHead col-3">코멘트</div>
-    </div>
-  </div>
+
   
   <c:forEach items="${view }" var="row">
-  <div class="divTableBody">
+
     <div class="divTableRow">
       <div class="divTableCell col-2">${row.b_no }</div>
       <div class="divTableCell col-2">${row.mb_cate }</div>
       <div class="divTableCell col-2">${row.b_catename }</div>
       <div class="divTableCell col-3">${row.b_url }</div>
       <div class="divTableCell col-3">${row.b_comment }</div>
+      <button type="submit" class="divTableCell col-2">게시판삭제 </button>
       </div>
-    
-  </div>
+
   </c:forEach>
 </div>
 
+
+<!-- 새로 입력하는 form입니다 -->
+<div class="">
+	<form action="./multiboard" method="post">
+	
+	<input type="text" name="name" required="required" placeholder="게시판 이름 입력"	>
+	
+	<input type="text" name="comment" required="required" placeholder="참고를 남겨주세요"	>
+	<input type="text" name="cateNum" required="required" placeholder="게시판번호를 입력해주세요"	>
+	<button type="submit" onclick="createboard(this)"> 저장 </button>
+	</form>
+
+
+</div>
 
  
 </body>

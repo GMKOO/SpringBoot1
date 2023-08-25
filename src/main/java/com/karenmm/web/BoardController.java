@@ -94,12 +94,13 @@ public class BoardController {
 	@PostMapping("/detail2")
 	public String detail2(@RequestParam("bno") int bno) throws JsonProcessingException {
 	
-		ObjectMapper mapp = new ObjectMapper();
+
 		BoardDTO detail = boardService.detail2(bno);
 		
-		
+		ObjectMapper mapp = new ObjectMapper();
 		String json = mapp.writeValueAsString(detail);
-		
+	
+		System.out.println("jsonnn"+json);
 		
 		return json.toString();
 		
