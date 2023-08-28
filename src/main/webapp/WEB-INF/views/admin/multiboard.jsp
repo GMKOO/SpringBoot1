@@ -6,7 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>  multiboard</title>
-    <link href="css/styles.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet" href="../css/multiboard.css">
 
     <script src="./js/jquery-3.7.0.min.js"></script>
 	<style type="text/css">
@@ -76,8 +79,25 @@
  <!-- Masthead-->
     
         
-               <h1>게시판관리</h1>
-
+      
+<div class="container">
+		<%@ include file="menu.jsp" %>
+		<div class="main">
+			<div class="article">			
+				<h1>메인영역</h1>
+				
+					<div class="div-table">
+						<div class="div-row table-head">
+							<div class="div-cell table-head">번호</div>
+							<div class="div-cell table-head">카테고리</div>
+							<div class="div-cell table-head">제목</div>
+							<div class="div-cell table-head">글쓴이</div>
+							<div class="div-cell table-head">날짜</div>
+							<div class="div-cell table-head">읽음수</div>
+							<div class="div-cell table-head">삭제</div>
+						</div>
+  
+  
   
   <c:forEach items="${view }" var="row">
 
@@ -91,7 +111,15 @@
       </div>
 
   </c:forEach>
-</div>
+				</div>
+					<!-- 새로 입력하는 form입니다 -->
+				
+			</div>
+		</div>
+	</div>
+ 
+
+
 
 
 <!-- 새로 입력하는 form입니다 -->

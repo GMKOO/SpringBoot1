@@ -6,8 +6,43 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet" href="../css/admin.css">
+<link rel="stylesheet" href="../css/multiboard.css">
+
 
 <style type="text/css">
+
+h1{
+margin-left: 50px;
+}
+
+.container{
+	margin-left: 50px;
+}
+.div-table{
+	margin: 0 auto;
+	display: table;
+	width: 900px;
+	height: auto;
+}
+
+.div-row{
+	display: table-row;
+	height: 30px;
+	line-height: 30px;
+}
+
+.div-cell{
+	display: table-cell;
+	border-bottom: 1px solid gray;
+	text-align: center;
+}
+.table-head{
+	background-color: gray;
+	font-weight: bold;
+	text-align: center;
+}
 
 .red { 
 background-color: red;
