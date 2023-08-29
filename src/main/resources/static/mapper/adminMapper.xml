@@ -151,6 +151,12 @@ FROM setupboard
 
 </select>
 
+<select id="content" parameterType="Integer" resultType="String">
+
+SELECT mb_content FROM multiboard WHERE mb_no=#{mbno}
+
+</select>
+
 
 
 </mapper>

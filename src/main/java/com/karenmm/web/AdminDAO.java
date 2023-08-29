@@ -36,6 +36,9 @@ public interface AdminDAO {
 
 	List<Map<String, Object>> boardList();
 
+	String content(int mbno);
+	
+
 
 
 	 

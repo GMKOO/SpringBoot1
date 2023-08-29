@@ -25,33 +25,55 @@
 			});
 	});
 	*/
-
-
-
-	
-
-
+		
+/*
 	$(function(){
 		$(".title").click(function(){
-		  
 		
 			let serchid =
-						
-					
 		
-			
-			
-			
-				
-			
 		$(".div-sell").append(serchid);
-				
-				
+*/
+
+
+$(function(){
+	$(".title").click(function(){
+		var mbno = $(this).siblings(".mb_no").text();
+        var mbdetail = $(this).parent().siblings("." + mbno);
+        var mb_content = $(this).parent().siblings(".mb_detail").children();
+        if (mb_content.is(":visible")) {
+        	$.ajax({
+				url: "./detail",
+				type: "get",
+				data: {mbno:mbno},
+				dataType: "json",
+				success: function (data) {
+					mb_content.hide();
+				},
+				error: function (error) {
+					alert("에러발생");
+				}
 			});
-			
-					
-		});
-	
+        }
+        
+       	if (!(mb_content.is(":visible"))) {
+			$.ajax({
+				url: "./detail",
+				type: "get",
+				data: {mbno:mbno},
+				dataType: "json",
+				success: function (data) {
+					mbdetail.html('<td colspan="7" class="mb_content">' + data.content + '</td>');
+				},
+				error: function (error) {
+					alert("에러발생");
+				}
+			});
+        }
+        
+        
+	});
+});
 
 	
 	</script>
@@ -113,7 +135,7 @@
 						</div>
 						<c:forEach items="${list }" var="row">
 						<div class="div-row"> <c:if test ="${row.mb_del eq 0 }"> gray</c:if>
-							<div class="div-cell">${row.mb_no }</div>
+							<div class="mb_no">${row.mb_no }</div>
 							<div class="div-cell">${row.b_catename}</div>
 							<div class="div-cell title">${row.mb_title }</div>
 							<div class="div-cell">${row.m_name }(${row.m_id})</div>
@@ -121,6 +143,7 @@
 							<div class="div-cell">${row.mb_read }</div>
 							<div class="div-cell">${row.mb_del }</div>
 						</div>
+						<div class="${row.mb_no } mb_detail"> </div>
 						</c:forEach>
 					</div>
 					<!-- 새로 입력하는 form입니다 -->

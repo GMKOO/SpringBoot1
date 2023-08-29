@@ -70,6 +70,10 @@ public class AdminService {
 		return adminDAO.boardList();
 	}
 
+	public String content(int mbno) {
+		return adminDAO.content(mbno);
+	}
+
 
 
 
